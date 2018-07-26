@@ -2,9 +2,11 @@ import tkinter as tk        # 1 imports
 from tkinter import ttk
 import math
 
+#---Constants---------------------------------------
 width = 1000
 height = 600
 
+#---GUI---------------------------------------
 win = tk.Tk()               # 2 Create instance
 win.title("Python GUI")     # 3 Add a title       
     
@@ -20,6 +22,11 @@ canvas.create_image((width//2, height//2), image=img, state="normal")
 aLabel = ttk.Label(win, text="A Label")                      # 2
 aLabel.grid(column=0, row=1)                                 # 3
 
+# Adding a Button                                            # 6
+action = ttk.Button(win, text="Click Me!", command=clickMe)  # 7
+action.grid(column=1, row=1)                                 # 8
+
+#---Drawing---------------------------------------
 def center_and_invert(y, height):
     return int(height/2 - y)
 
@@ -44,9 +51,6 @@ def clickMe():                                               # 5
 	action.configure(text="** I have been Clicked! **")
 	aLabel.configure(foreground='red')
 	graph(f, range(width), height)
-	
-# Adding a Button                                            # 6
-action = ttk.Button(win, text="Click Me!", command=clickMe)  # 7
-action.grid(column=1, row=1)                                 # 8
 
+#---Gui Main Loop---------------------------------------
 win.mainloop()              # 5 Start GUI
