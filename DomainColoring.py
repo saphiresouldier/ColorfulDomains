@@ -3,28 +3,9 @@ from tkinter import ttk
 import math
 
 #---Constants---------------------------------------
+
 width = 1000
 height = 600
-
-#---GUI---------------------------------------
-win = tk.Tk()               # 2 Create instance
-win.title("Python GUI")     # 3 Add a title       
-    
-#win.resizable(1024, 1024)         # 4 Disable resizing the GUI
-
-canvas = tk.Canvas(win, width=width, height=height, bg="#000000")
-canvas.pack()
-canvas.grid(column=0,row=0)
-img = tk.PhotoImage(width=width, height=height)
-canvas.create_image((width//2, height//2), image=img, state="normal")
-
-# Modify adding a Label                                      # 1
-aLabel = ttk.Label(win, text="A Label")                      # 2
-aLabel.grid(column=0, row=1)                                 # 3
-
-# Adding a Button                                            # 6
-action = ttk.Button(win, text="Click Me!", command=clickMe)  # 7
-action.grid(column=1, row=1)                                 # 8
 
 #---Drawing---------------------------------------
 def center_and_invert(y, height):
@@ -46,11 +27,36 @@ def fill(width, height):
 		for w in range(width):
 			img.put("#888888", (w, h))
 
-# Button Click Event Callback Function                       # 4
-def clickMe():                                               # 5
+# Button Click Event Callback Function
+def clickMe():
 	action.configure(text="** I have been Clicked! **")
 	aLabel.configure(foreground='red')
 	graph(f, range(width), height)
 
+#---GUI---------------------------------------
+win = tk.Tk()
+win.title("Python GUI")
+    
+#win.resizable(1024, 1024)      Disable resizing the GUI
+
+canvas = tk.Canvas(win, width=width, height=height, bg="#000000")
+canvas.pack()
+canvas.grid(column=0,row=0, sticky='WE', columnspan=3)
+img = tk.PhotoImage(width=width, height=height)
+canvas.create_image((width//2, height//2), image=img, state="normal")
+
+# Modify adding a Label
+aLabel = ttk.Label(win, text="Enter complex formula here:")
+aLabel.grid(column=0, row=1)
+
+# Adding a Textbox Entry widget
+formula = tk.StringVar()
+nameEntered = ttk.Entry(win, width=70, textvariable=formula)
+nameEntered.grid(column=1, row=1)
+
+# Adding a Button
+action = ttk.Button(win, text="Show me!", command=clickMe)
+action.grid(column=2, row=1)
+
 #---Gui Main Loop---------------------------------------
-win.mainloop()              # 5 Start GUI
+win.mainloop()
