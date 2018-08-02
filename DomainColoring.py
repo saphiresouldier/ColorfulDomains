@@ -7,6 +7,22 @@ import math
 width = 1000
 height = 600
 
+supersample = 1
+
+centerreal = 0
+centerimag = 0
+
+fovy = 1
+
+sw = supersample * width
+sh = supersample * height
+
+aspectratio = width / height
+halffovy    = fovy / 2
+
+#---Complex Functions---------------------------------------
+
+
 #---Drawing---------------------------------------
 def center_and_invert(y, height):
     return int(height/2 - y)
