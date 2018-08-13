@@ -1,6 +1,6 @@
-import tkinter as tk        # 1 imports
+import tkinter as tk
 from tkinter import ttk
-import math
+import math, cmath
 
 #---Constants---------------------------------------
 
@@ -20,8 +20,20 @@ sh = supersample * height
 aspectratio = width / height
 halffovy    = fovy / 2
 
-#---Complex Functions---------------------------------------
+#---Color Ramps---------------------------------------
+#ToDo
 
+#---Complex Functions---------------------------------------
+def complex_function(z):
+    return cmath.sin(1 / z)
+
+def complex_color(z):
+    phase = cmath.phase(z)
+    t = phase / math.pi + 1
+    if t > 1:
+        t = 2 - t
+    #return colormap.at(t)
+    return '#888888'
 
 #---Drawing---------------------------------------
 def center_and_invert(y, height):
@@ -44,7 +56,7 @@ def fill(width, height):
 			img.put("#888888", (w, h))
 
 # Button Click Event Callback Function
-def clickMe():
+def click_me():
 	action.configure(text="** I have been Clicked! **")
 	aLabel.configure(foreground='red')
 	graph(f, range(width), height)
@@ -71,7 +83,7 @@ nameEntered = ttk.Entry(win, width=70, textvariable=formula)
 nameEntered.grid(column=1, row=1)
 
 # Adding a Button
-action = ttk.Button(win, text="Show me!", command=clickMe)
+action = ttk.Button(win, text="Show me!", command=click_me)
 action.grid(column=2, row=1)
 
 #---Gui Main Loop---------------------------------------
