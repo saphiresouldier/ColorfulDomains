@@ -39,6 +39,9 @@ def complex_color(z):
 def center_and_invert(y, height):
     return int(height/2 - y)
 
+def clamp(x):
+  return max(0, min(x, 255))
+
 def f(x):
     num_cycles = 4
     amplitude = 200
@@ -48,18 +51,17 @@ def graph(f, x_range, height):
     for x in x_range:
         y = center_and_invert(f(x), height)
         img.put("#ffffff", (x, y))
-		
+
 #fucking slow, find better way! pil, pillow, cython, ...
 def fill(width, height):
-	for h in range(height):
-		for w in range(width):
-			img.put("#888888", (w, h))
+    for h in range(height):
+        for w in range(width):
+            img.put("#{0:02x}{1:02x}{2:02x}".format(clamp(round(h / height * 255)), clamp(round(w / width * 255)), clamp(255)), (w, h))
 
 # Button Click Event Callback Function
 def click_me():
-	action.configure(text="** I have been Clicked! **")
-	aLabel.configure(foreground='red')
-	graph(f, range(width), height)
+    fill(width, height)
+    #graph(f, range(width), height)
 
 #---GUI---------------------------------------
 win = tk.Tk()
