@@ -21,7 +21,20 @@ aspectratio = width / height
 halffovy    = fovy / 2
 
 #---Color Ramps---------------------------------------
-#ToDo
+
+color_ramp = []
+color_ramp.append("#000000")
+color_ramp.append("#888888")
+
+def color_ramp(t):
+    if t <= 0:
+        return color_ramp[0]
+    elif t >= 1:
+        return color_ramp[color_ramp.len - 1]
+        
+    #ToDo: lerp between colors
+    
+    return '#888888'
 
 #---Complex Functions---------------------------------------
 def complex_function(z):
@@ -32,12 +45,16 @@ def complex_color(z):
     t = phase / math.pi + 1
     if t > 1:
         t = 2 - t
-    #return colormap.at(t)
-    return '#888888'
+    return color_ramp(t)
 
 #---Drawing---------------------------------------
 def center_and_invert(y, height):
     return int(height/2 - y)
+
+def pixel_coordinates(px, py):
+    x = (px/(sw - 1) * 2 - 1) * aspectratio * halffovy + centerreal
+    y = ((sh - py - 1)/(sh - 1) * 2 - 1) *halffovy + centerimag
+    return (x, y)
 
 def clamp(x):
   return max(0, min(x, 255))
@@ -56,7 +73,8 @@ def graph(f, x_range, height):
 def fill(width, height):
     for h in range(height):
         for w in range(width):
-            img.put("#{0:02x}{1:02x}{2:02x}".format(clamp(round(h / height * 255)), clamp(round(w / width * 255)), clamp(255)), (w, h))
+            img.put("#{0:02x}{1:02x}{2:02x}".format(clamp(math.floor(h / height * 255)), clamp(math.floor(w / width * 255)), clamp(255)), (w, h))
+    img.write('output_1.png', format='png')
 
 # Button Click Event Callback Function
 def click_me():
@@ -75,7 +93,7 @@ canvas.grid(column=0,row=0, sticky='WE', columnspan=3)
 img = tk.PhotoImage(width=width, height=height)
 canvas.create_image((width//2, height//2), image=img, state="normal")
 
-# Modify adding a Label
+# Adding a Label
 aLabel = ttk.Label(win, text="Enter complex formula here:")
 aLabel.grid(column=0, row=1)
 
