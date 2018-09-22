@@ -89,14 +89,24 @@ def graph(f, x_range, height):
 
 #fucking slow, find better way! pil, pillow, cython, ...
 def fill(width, height):
+    #framing
+    (x0, y0) = pixel_coordinates(0, 0)
+    (x1, y1) = pixel_coordinates(sw - 1, sh - 1)
+    dx = (x1 - x0) / (sw - 1)
+    dy = (y1 - y0) / (sh - 1)
+    
+    y = y0
     for h in range(height):
+        x = x0
         for w in range(width):
             #complex calc
-            c_z = complex_function(complex(w, h))
+            c_z = complex_function(complex(x, y))
             c_c = complex_color(c_z)
             img.put(c_c, (w, h))
+            x += dx
             #write values
             #img.put("#{0:02x}{1:02x}{2:02x}".format(clamp(math.floor(h / height * 255)), clamp(math.floor(w / width * 255)), clamp(255)), (w, h))
+        y += dy
     img.write('output_1.png', format='png')
 
 # Button Click Event Callback Function
