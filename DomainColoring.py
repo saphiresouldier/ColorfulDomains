@@ -26,18 +26,36 @@ color_ramp = []
 color_ramp.append("#000000")
 color_ramp.append("#888888")
 
-def color_ramp(t):
+def color_ramp_bw(t):
     if t <= 0:
-        return color_ramp[0]
+        return '#ffffff'
+        #return color_ramp[0]
     elif t >= 1:
-        return color_ramp[color_ramp.len - 1]
+        return '#000000'
+        #return color_ramp[color_ramp.len - 1]
         
     #ToDo: lerp between colors
+    val = t * 255
+    
+    return '#{0:02x}{1:02x}{2:02x}'.format(clamp(int(round(val))), clamp(int(round(val))), clamp(int(round(val))))
+
+def color_ramp(t):
+    if t <= 0:
+        return '#ffffff'
+        #return color_ramp[0]
+    elif t >= 1:
+        return '#000000'
+        #return color_ramp[color_ramp.len - 1]
+        
+    #ToDo: lerp between colors
+    
     
     return '#888888'
 
 #---Complex Functions---------------------------------------
 def complex_function(z):
+    if z == 0:
+        return 0
     return cmath.sin(1 / z)
 
 def complex_color(z):
@@ -45,7 +63,7 @@ def complex_color(z):
     t = phase / math.pi + 1
     if t > 1:
         t = 2 - t
-    return color_ramp(t)
+    return color_ramp_bw(t)
 
 #---Drawing---------------------------------------
 def center_and_invert(y, height):
@@ -73,7 +91,12 @@ def graph(f, x_range, height):
 def fill(width, height):
     for h in range(height):
         for w in range(width):
-            img.put("#{0:02x}{1:02x}{2:02x}".format(clamp(math.floor(h / height * 255)), clamp(math.floor(w / width * 255)), clamp(255)), (w, h))
+            #complex calc
+            c_z = complex_function(complex(w, h))
+            c_c = complex_color(c_z)
+            img.put(c_c, (w, h))
+            #write values
+            #img.put("#{0:02x}{1:02x}{2:02x}".format(clamp(math.floor(h / height * 255)), clamp(math.floor(w / width * 255)), clamp(255)), (w, h))
     img.write('output_1.png', format='png')
 
 # Button Click Event Callback Function
