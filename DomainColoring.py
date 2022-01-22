@@ -79,15 +79,18 @@ def hsv_to_hex(m, p):
 def complex_function(z):
     if z == 0:
         return 0
+
+    # various functions
     #return cmath.sin(1 / z)
-    return z
+    return cmath.tan(1 / z)
+    #return z
 
 def complex_color(z):
     phase = cmath.phase(z)
     amplitude = abs(z)
     
-    #return color_ramp_bw(phase)
-    return hsv_to_hex(amplitude, phase)
+    #return color_ramp_bw(phase) # black white colorramp
+    return hsv_to_hex(amplitude, phase) # colorful ramp
 
 #---Drawing---------------------------------------
 def center_and_invert(y, height):
