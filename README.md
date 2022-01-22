@@ -14,13 +14,23 @@ Execute the DomainColoring python script:
 
 # Images
 
+**tan( 1 / z )**
+
 ![tan( 1 / z)](screenshots/screenshot_0.jpg)
+
+**sin( 1 / z)**
 
 ![sin( 1 / z)](screenshots/screenshot_1.jpg)
 
+**sin( 1 / z), alternative colorramp**
+
 ![sin( 1 / z), alternative colorramp](screenshots/screenshot_2.jpg)
 
+**visualisation of z***
+
 ![visualisation of z](screenshots/screenshot_3.jpg)
+
+**visualisation of z, alternative colorramp**
 
 ![visualisation of z, alternative colorramp](screenshots/screenshot_4.jpg)
 
