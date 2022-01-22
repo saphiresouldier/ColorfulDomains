@@ -34,3 +34,7 @@ Execute the DomainColoring python script:
 
 ![visualisation of z, alternative colorramp](screenshots/screenshot_4.jpg)
 
+# ToDo
+
+Formula field not working for now, enter in code
+
