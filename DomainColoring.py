@@ -46,19 +46,8 @@ def color_ramp_bw(phase):
     
     return '#{0:02x}{1:02x}{2:02x}'.format(clamp(int(round(value))), clamp(int(round(value))), clamp(int(round(value))))
 
-#TODO
-def color_ramp(t):
-    if t <= 0:
-        return '#ffffff'
-        #return color_ramp[0]
-    elif t >= 1:
-        return '#000000'
-        #return color_ramp[color_ramp.len - 1]
-        
-    #ToDo: lerp between colors
-    val = t * 255
-    
-    return '#{0:02x}{1:02x}{2:02x}'.format(clamp(int(round(val))), clamp(0), clamp(255))
+#alternative return
+#return '#{0:02x}{1:02x}{2:02x}'.format(clamp(int(round(val))), clamp(0), clamp(255))
 
 def hsv_to_hex(m, p):
     #scaling of phase to 1 - 0
